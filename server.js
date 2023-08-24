@@ -15,22 +15,21 @@ const io = new Server(server, {
 
 io.on('connection', (socket) => {
     console.log('a user connected');
+    console.log('current number of users: ' + io.engine.clientsCount)
+    io.emit('user connection', io.engine.clientsCount)
+
     socket.on('disconnect', () => {
         console.log('user disconnected');
+        console.log('current number of users: ' + io.engine.clientsCount)
+        io.emit('user connection', io.engine.clientsCount)
     });
-    socket.on('chat message', (msg) => {
-        io.emit('chat message', msg);
-    });
-    socket.on("sendMsg", (msg) => {
-        console.log(msg);
-    });
+
     socket.on("log-response", data => {
         console.log("Name: " + data.name);
         console.log("Email: " + data.email);
-        console.log("Age: " + data.age);
         console.log("Phone Number: " + data.phone_num);
-        console.log("Date of Birth: " + data.dob);
-        console.log("Address: " + data.address);
+        console.log("Date: " + data.date);
+        console.log();
     });
 });
 
