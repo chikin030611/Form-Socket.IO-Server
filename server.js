@@ -26,10 +26,13 @@ io.on('connection', (socket) => {
 
     socket.on("log-response", data => {
         console.log("Name: " + data.name);
+        console.log("Phone Number: " + data.phoneNum);
         console.log("Email: " + data.email);
-        console.log("Phone Number: " + data.phone_num);
+        console.log("Number of Persons: " + data.numOfPersons);
         console.log("Date: " + data.date);
+        console.log("Time: " + data.time);
         console.log();
+        io.emit("confirmation", data);
     });
 });
 
